@@ -1,0 +1,18 @@
+{
+	"manifest_version": 2,
+	"name": "Metro tab",
+	"version": "1.0_b1",
+	"description": "A simple metro new tab page",
+	"chrome_url_overrides": {
+		"newtab": "metro_tab.html"
+	},
+	"icons": {
+		"48": "icons/metro_tab.png",
+		"96": "icons/metro_tab_96.png"
+	},
+	"applications": {
+		"gecko": {
+			"strict_min_version": "50.0"
+		}
+	}
+}
