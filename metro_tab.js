@@ -8,14 +8,18 @@ function loadBookmarkFolder() {
 }
 
 function createTileHtml(tile, replace) {
-	var htm = '<a id="' + tile.id + '" href="' + tile.url + '" class="flex-item" data-id="' + tile.id + '">\r\n' +
-		'<span class="tab-color" style="background-color: ' + tile.color + '"></span>' +
+	var item = document.createElement('a');
+	item.setAttribute("id", tile.id);
+	item.setAttribute("href", tile.url);
+	item.setAttribute('class', 'flex-item');
+	item.setAttribute('data-id', tile.id);
+
+	item.innerHTML = '<span class="tab-color" style="background-color: ' + tile.color + '"></span>' +
 		'<span class="tab-thumbnail"></span>' +
-		'<span class="tab-title">' + tile.title + '</span>\r\n' +
-		'</a>';
-	var item = $create(htm);
+		'<span class="tab-title">' + tile.title + '</span>';
+
 	if (tile.icon && tile.icon.length > 0) {
-		item.find('.tab-thumbnail').css('background-image', tile.icon);
+		$class(item, 'tab-thumbnail').style.backgroundImage = tile.icon;
 	}
 	var container = $id('site-container');
 	if (replace) {
@@ -53,15 +57,7 @@ function applySorting() {
 function deleteItemContextMenu(id) {
 	console.log('delete id ' + id);
 	MetroStorage.removeTileById(id);
-	$('a[data-id=' + id + ']').remove();
-}
-
-function $id(id) {
-	return document.getElementById(id);
-}
-
-function $create() {
-
+	$id(id).remove();
 }
 
 function editItemContextMenu(id) {
@@ -74,10 +70,6 @@ function editItemContextMenu(id) {
 		$id('thumbnailPreviewId').style.backgroundImage = tile.icon;
 		$id('modalState').checked = true;
 	}
-}
-
-function closeEditForm() {
-	//$('#modalState').prop('checked', false).trigger('change');
 }
 
 function initEditorBackground() {
@@ -98,59 +90,4 @@ function initEditorBackground() {
 	}
 	var image = MetroStorage.getBackgroundImage();
 	$id('backgroundContainerId').style.backgroundImage = 'url(' + (image ? image : 'img/background.jpg') + ')';
-}
-
-function initEditor() {
-	/*$('#modalState').on('change', function () {
-	 if ($(this).prop('checked') === false) {
-	 //$('#editTileFormId')[0].reset();
-	 $('#thumbnailPreviewId').css('background-image', '');
-	 }
-	 });*/
-	$('#addTitleId').on('keyup keypress blur change', function () {
-		$('#titlePreviewId').val($(this).val());
-	});
-
-	$("#btnImport").click(function () {
-		$("#fileImport").trigger("click");
-	});
-
-	$('#tileBgId').on('change', function () {
-		$('#colorPreviewId').css('background-color', $(this).val());
-	});
-
-	$("#fileImport").unbind("change").on('change', function () {
-		var file = this.files[0];
-		if (file) {
-			var reader = new FileReader();
-			reader.onloadend = function () {
-				$('#thumbnailPreviewId').css('background-image', 'url(' + reader.result + ')');
-			};
-			reader.readAsDataURL(file);
-		}
-	});
-
-	$('#tileSaveId').on('click', function () {
-		var $tileId = $('#tileId');
-		var replace = $tileId.val().length > 0;
-		var newBkmk = {
-			id: replace ? $tileId.val() : generateId(),
-			url: $('#addUrlId').val(),
-			color: $('#tileBgId').val(),
-			title: $('#addTitleId').val(),
-			icon: $('#thumbnailPreviewId').css('background-image')
-		};
-		MetroStorage.addOrUpdateTile(newBkmk);
-		createTileHtml(newBkmk, replace);
-		closeEditForm();
-	});
-}
-
-function generateId() {
-	var text = "";
-	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-	for (var i = 0; i < 10; i++) {
-		text += possible.charAt(Math.floor(Math.random() * possible.length));
-	}
-	return text;
 }

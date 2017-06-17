@@ -7,6 +7,7 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
+	font-family: "Roboto", sans-serif;
 	text-align: left;
 	background: rgba(0, 0, 0, .8);
 	transition: opacity .1s ease;
@@ -30,7 +31,7 @@
 	visibility: visible;
 }
 
-.modal-state:checked + .modal .modal__inner {
+.modal-state:checked + .modal .modal-inner {
 	top: 3em;
 }
 
@@ -46,7 +47,7 @@
 	font-weight: bold;
 }
 
-.modal__inner {
+.modal-inner {
 	transition: top .25s ease;
 	position: absolute;
 	top: 3em;
@@ -90,9 +91,27 @@
 	transform: rotate(-45deg);
 }
 
+.modal-input {
+	border: 1px solid gray;
+	border-radius: 2px;
+	padding: 3px 6px;
+}
+
+.modal-input.fw {
+	width: 100%;
+}
+
+.valid {
+	border-color: forestgreen;
+}
+
+.error {
+	border-color: crimson;
+}
+
 /*
 @media screen and (max-width: 768px) {
-	.modal__inner {
+	.modal-inner {
 		width: 90%;
 		height: 90%;
 		box-sizing: border-box;

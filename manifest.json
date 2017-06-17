@@ -1,18 +1,29 @@
 {
 	"manifest_version": 2,
 	"name": "Metro tab",
-	"version": "1.0_b1",
+	"version": "1.0_b2",
 	"description": "A simple metro new tab page",
 	"chrome_url_overrides": {
 		"newtab": "metro_tab.html"
+	},
+	"browser_action": {
+		"default_icon": {
+			"48": "icons/metro_tab.png",
+			"96": "icons/metro_tab_96.png"
+		},
+		"default_title": "Metro tab",
+		"default_popup": "options.html"
 	},
 	"icons": {
 		"48": "icons/metro_tab.png",
 		"96": "icons/metro_tab_96.png"
 	},
+	"permissions": [
+		"tabs"
+	],
 	"applications": {
 		"gecko": {
-			"strict_min_version": "50.0"
+			"strict_min_version": "54.0"
 		}
 	}
 }
