@@ -1,26 +1,27 @@
+document.addEventListener('DOMContentLoaded', loadBookmarkFolder);
+
 function loadBookmarkFolder() {
 	fillTiles();
 	applySorting();
-	initEditor();
+	//initEditor();
 	initEditorBackground();
 }
 
-document.addEventListener('DOMContentLoaded', loadBookmarkFolder);
-
 function createTileHtml(tile, replace) {
-	var htm = '<a href="' + tile.url + '" class="flex-item" data-id="' + tile.id + '">\r\n' +
+	var htm = '<a id="' + tile.id + '" href="' + tile.url + '" class="flex-item" data-id="' + tile.id + '">\r\n' +
 		'<span class="tab-color" style="background-color: ' + tile.color + '"></span>' +
 		'<span class="tab-thumbnail"></span>' +
 		'<span class="tab-title">' + tile.title + '</span>\r\n' +
 		'</a>';
-	var item = $(htm);
+	var item = $create(htm);
 	if (tile.icon && tile.icon.length > 0) {
 		item.find('.tab-thumbnail').css('background-image', tile.icon);
 	}
+	var container = $id('site-container');
 	if (replace) {
-		$('a[data-id=' + tile.id + ']').replaceWith(item);
+		container.replaceChild(item, $id(tile.id));
 	} else {
-		$('#site-container').append(item);
+		container.appendChild(item);
 	}
 }
 
@@ -37,7 +38,7 @@ function fillTiles() {
 }
 
 function applySorting() {
-	var el = document.getElementById('site-container');
+	var el = $id('site-container');
 	Sortable.create(el, {
 		animation: 100,
 		onEnd: function (e) {// Element dragging ended
@@ -55,50 +56,57 @@ function deleteItemContextMenu(id) {
 	$('a[data-id=' + id + ']').remove();
 }
 
+function $id(id) {
+	return document.getElementById(id);
+}
+
+function $create() {
+
+}
+
 function editItemContextMenu(id) {
 	var tile = MetroStorage.findTileById(id);
 	if (tile) {
-		$('#tileId').val(tile.id);
-		$('#addTitleId').val(tile.title).trigger('change');
-		$('#tileBgId').val(tile.color).trigger('change');
-		$('#addUrlId').val(tile.url).trigger('change');
-		$('#thumbnailPreviewId').css('background-image', tile.icon);
-		$('#modal-2').prop('checked', true);
+		$id('tileId').value = tile.id;
+		$id('addTitleId').value = tile.title;
+		$id('tileBgId').value = tile.color;
+		$id('addUrlId').value = tile.url; //).trigger('change');
+		$id('thumbnailPreviewId').style.backgroundImage = tile.icon;
+		$id('modalState').checked = true;
 	}
 }
 
 function closeEditForm() {
-	$('#modal-2').prop('checked', false).trigger('change');
+	//$('#modalState').prop('checked', false).trigger('change');
 }
 
 function initEditorBackground() {
-	$('#fileBkg').on('change', function () {
-		var file = this.files[0];
-		if (file) {
-			var reader = new FileReader();
-			reader.onloadend = function () {
-				var img = reader.result;
-				$('body').css('background-image', 'url(' + img + ')');
-				MetroStorage.setBackgroundImage(img);
-			};
-			reader.readAsDataURL(file);
-		}
-	});
-	var image = MetroStorage.getBackgroundImage();
-	if (image) {
-		$('#backgroundContainerId').css('background-image', 'url(' + image + ')');
-	} else {
-		$('#backgroundContainerId').css('background-image', 'url(img/background.jpg)');
+	var fileBack = $id('fileBkg');
+	if (fileBack) {
+		fileBack.addEventListener('change', function () {
+			var file = this.files[0];
+			if (file) {
+				var reader = new FileReader();
+				reader.onloadend = function () {
+					var img = reader.result;
+					$id('backgroundContainerId').style.backgroundImage = 'url(' + img + ')';
+					MetroStorage.setBackgroundImage(img);
+				};
+				reader.readAsDataURL(file);
+			}
+		});
 	}
+	var image = MetroStorage.getBackgroundImage();
+	$id('backgroundContainerId').style.backgroundImage = 'url(' + (image ? image : 'img/background.jpg') + ')';
 }
 
 function initEditor() {
-	$('#modal-2').on('change', function () {
-		if ($(this).prop('checked') === false) {
-			$('#editTileFormId')[0].reset();
-			$('#thumbnailPreviewId').css('background-image', '');
-		}
-	});
+	/*$('#modalState').on('change', function () {
+	 if ($(this).prop('checked') === false) {
+	 //$('#editTileFormId')[0].reset();
+	 $('#thumbnailPreviewId').css('background-image', '');
+	 }
+	 });*/
 	$('#addTitleId').on('keyup keypress blur change', function () {
 		$('#titlePreviewId').val($(this).val());
 	});

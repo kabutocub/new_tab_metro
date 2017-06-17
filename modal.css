@@ -13,13 +13,12 @@
 	z-index: 100;
 }
 
-.modal__bg {
+.modal-bg {
 	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
-	cursor: pointer;
 }
 
 .modal-state {
@@ -39,7 +38,7 @@
 	margin-top: .5em;
 }
 
-.modal__header {
+.modal-header {
 	position: absolute;
 	left: 1em;
 	top: .7em;
@@ -59,7 +58,7 @@
 	padding: 2.5em 1.8em 1em 1.6em;
 }
 
-.modal__close {
+.modal-close {
 	position: absolute;
 	right: 1em;
 	top: 1em;
@@ -68,8 +67,8 @@
 	cursor: pointer;
 }
 
-.modal__close:after,
-.modal__close:before {
+.modal-close:after,
+.modal-close:before {
 	content: '';
 	position: absolute;
 	width: 2px;
@@ -82,12 +81,12 @@
 	top: 0;
 }
 
-.modal__close:hover:after,
-.modal__close:hover:before {
+.modal-close:hover:after,
+.modal-close:hover:before {
 	background: #aaa;
 }
 
-.modal__close:before {
+.modal-close:before {
 	transform: rotate(-45deg);
 }
 
