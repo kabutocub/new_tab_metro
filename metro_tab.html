@@ -15,16 +15,12 @@
 </div>
 
 <div id="rightPanelId" class="right-panel">
-	<label for="modalState2" class="right-pn-button settings"></label>
+	<label for="modalStateSettings" class="right-pn-button settings"></label>
+	<input id="modalStateSettings" class="modal-state" type="checkbox" autocomplete="off"
+		   data-form="modal_settings_form.html" data-scripts="modal_settings_form.js"/>
 	<label for="modalState" class="right-pn-button add"></label>
-	<input id="modalState" class="modal-state" type="checkbox" autocomplete="off"/>
-	<div id="modalContainerId" class="modal">
-		<label class="modal-bg" for="modalState"></label>
-		<div class="modal-inner" style="width: 20em; height: 22em;">
-			<label class="modal-close" for="modalState"></label>
-			<form id="modalFormId" autocomplete="off"></form>
-		</div>
-	</div>
+	<input id="modalState" class="modal-state" type="checkbox" autocomplete="off"
+		   data-form="modal_edit_tile_form.html" data-scripts="jscolor.js;modal_edit_tile_form.js"/>
 </div>
 
 <nav id="context-menu" class="context-menu">

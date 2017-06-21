@@ -63,6 +63,8 @@ MetroStorage = {
 		if (value) {
 			this._backgroundImage = value;
 			localStorage.backgroundImage = value;
+		} else {
+			localStorage.removeItem('backgroundImage');
 		}
 	}
 };

@@ -19,7 +19,7 @@ function createTileHtml(tile, replace) {
 		'<span class="tab-title">' + tile.title + '</span>';
 
 	if (tile.icon && tile.icon.length > 0) {
-		$class(item, 'tab-thumbnail').style.backgroundImage = tile.icon;
+		$class(item, 'tab-thumbnail').style.backgroundImage = 'url(' + tile.icon + ')';
 	}
 	var container = $id('site-container');
 	if (replace) {
@@ -61,31 +61,34 @@ function deleteItemContextMenu(id) {
 }
 
 function editItemContextMenu(id) {
-	var tile = MetroStorage.findTileById(id);
-	if (tile) {
-		$id('tileId').value = tile.id;
-		$id('addTitleId').value = tile.title;
-		$id('tileBgId').value = tile.color;
-		$id('addUrlId').value = tile.url; //).trigger('change');
-		$id('thumbnailPreviewId').style.backgroundImage = tile.icon;
-		$id('modalState').checked = true;
-	}
+	$id('modalState').click();
+	setTimeout(function () {
+		var tile = MetroStorage.findTileById(id);
+		if (tile) {
+			$id('tileId').value = tile.id;
+			$id('addTitleId').value = tile.title;
+			$id('tileBgId').value = tile.color;
+			$id('addUrlId').value = tile.url;
+
+			var img = new Image();
+			img.addEventListener('load', function () {
+				var canv = $id('canvasPickerId');
+				canv.getContext('2d').drawImage(img, 0, 0, canv.width, canv.height);
+			}, false);
+			img.src = tile.icon;
+		}
+	}, 100);
 }
 
 function initEditorBackground() {
 	var fileBack = $id('fileBkg');
 	if (fileBack) {
 		fileBack.addEventListener('change', function () {
-			var file = this.files[0];
-			if (file) {
-				var reader = new FileReader();
-				reader.onloadend = function () {
-					var img = reader.result;
-					$id('backgroundContainerId').style.backgroundImage = 'url(' + img + ')';
-					MetroStorage.setBackgroundImage(img);
-				};
-				reader.readAsDataURL(file);
-			}
+			readFile(this, function (e) {
+				var img = e.target.result;
+				$id('backgroundContainerId').style.backgroundImage = 'url(' + img + ')';
+				MetroStorage.setBackgroundImage(img);
+			});
 		});
 	}
 	var image = MetroStorage.getBackgroundImage();

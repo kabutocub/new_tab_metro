@@ -64,22 +64,26 @@ html, body {
 	padding: 3em 4em 0 4em;
 }
 
-.flex-item {
+.flex-item-preview, .flex-item {
 	width: 8.5em;
 	height: 8.5em;
-	opacity: .9;
 	padding: 0.1em;
-	cursor: pointer;
 	position: relative;
+}
+
+.flex-item-preview {
+	display: inline-block;
+	border: 1px solid lightblue;
+	cursor: default;
+}
+
+.flex-item {
+	opacity: .9;
+	cursor: pointer;
 }
 
 .flex-item:hover {
 	opacity: unset;
-}
-
-.flex-item.preview {
-	display: inline-block;
-	border: 1px solid lightblue;
 }
 
 .tab-color {
@@ -99,6 +103,16 @@ html, body {
 	line-height: 8.5em;
 }
 
+.canvas-preview {
+	width: 6.5em;
+	height: 6.5em;
+	display: block;
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	cursor: crosshair;
+}
+
 .tab-thumbnail {
 	top: 1em;
 	left: 1em;
@@ -114,4 +128,39 @@ html, body {
 	width: 4.5em;
 	border: 1px solid #c4c4c4;
 	text-align: center;
+}
+
+.rel {
+	position: relative;
+}
+
+.lb {
+	border-bottom: 1px dotted lightgray;
+}
+
+.btn {
+	display: inline-block;
+	height: 1.8em;
+	border-radius: 2px;
+	text-decoration: none;
+	background-color: #337ab7;
+	font-size: .9em;
+	color: #fff;
+	text-align: center;
+	border: none;
+	line-height: 1.8em;
+	cursor: pointer;
+	min-width: 4em;
+	padding: 0 1em;
+}
+
+.hide {
+	display: none;
+}
+
+.set-btn {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 6em;
 }

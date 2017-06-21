@@ -15,15 +15,35 @@ function injectedFormScript() {
 		$id('colorPreviewId').style.backgroundColor = this.value;
 	});
 	addListeners('fileImport', 'change', function () {
-		var file = this.files[0];
-		if (file) {
-			var fr = new FileReader();
-			fr.onloadend = function () {
-				$id('thumbnailPreviewId').style.backgroundImage = 'url(' + fr.result + ')';
-			};
-			fr.readAsDataURL(file);
-		}
+		readFile(this, function (e) {
+			var img = new Image();
+			img.addEventListener("load", function () {// здесь выполняет drawImage функцию
+				var canv = $id('canvasPickerId');
+				canv.getContext('2d').drawImage(img, 0, 0, canv.width, canv.height);
+			}, false);
+			img.src = e.target.result;
+		});
 	});
+
+	var canvas = $id('canvasPickerId');
+	var style = window.getComputedStyle(canvas, null);
+	var multiplier = canvas.width / parseInt(style.width, 10);
+
+	addListeners('canvasPickerId', 'click', function (e) {
+		var canv = $id('canvasPickerId');
+		var x = Math.ceil(multiplier * e.layerX);
+		var y = Math.ceil(multiplier * e.layerY);
+		var dat = canv.getContext('2d').getImageData(x, y, 1, 1).data;
+		var clEditor = $id('tileBgId');
+		clEditor.value = rgbToHex(dat[0], dat[1], dat[2]);
+		clEditor.dispatchEvent(new Event('change'));
+		clEditor.style.backgroundColor = clEditor.value;
+	});
+
+	function rgbToHex(r, g, b) {
+		return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+	}
+
 	addListeners('tileSaveId', 'click', function () {
 		if (!validateEditForm()) {
 			return;
@@ -35,7 +55,7 @@ function injectedFormScript() {
 			url: $id('addUrlId').value,
 			color: $id('tileBgId').value,
 			title: $id('addTitleId').value,
-			icon: $id('thumbnailPreviewId').style.backgroundImage
+			icon: $id('canvasPickerId').toDataURL()
 		};
 		MetroStorage.addOrUpdateTile(newBkmk);
 		createTileHtml(newBkmk, replace);

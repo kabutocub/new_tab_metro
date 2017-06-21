@@ -2,25 +2,52 @@
 document.addEventListener('DOMContentLoaded', applyModalLoader);
 
 function applyModalLoader() {
-	//loadModalByName('modal_edit_tile_form.html');
-	$id('modalState').addEventListener('change', function () {
-		document.getElementById('modalFormId').innerHTML = '';
-		if (this.checked) {
-			loadModalByName('modal_edit_tile_form.html', function (textForm) {
-				$id('modalFormId').innerHTML = textForm;
-				var $id2 = $id('modalRootId');
-				if ($id2) {
-					var scr = $id2.getAttribute('data-scripts');
-					if (scr) {
-						var array = scr.split(';');
-						for (var i = 0; i < array.length; i++) {
-							addScript(array[i]);
-						}
+	var arr = $class2('modal-state');
+	for (var i = 0; i < arr.length; i++) {
+		addListeners(arr[i].id, 'change', function () {
+			var cbx = this;
+			var container = getContainer(cbx);
+			if (cbx.checked) {
+				loadModalByName(cbx.getAttribute('data-form'), function (textForm) {
+					container.innerHTML = textForm.replace(/\${mds}/g, cbx.id);
+					var array = cbx.getAttribute('data-scripts').split(';');
+					for (var i = 0; i < array.length; i++) {
+						addScript(array[i]);
+					}
+				});
+			} else {
+				var array = cbx.getAttribute('data-scripts').split(';');
+				for (var i = 0; i < array.length; i++) {
+					var script = $id(array[i]);
+					if (script) {
+						script.remove();
 					}
 				}
-			});
-		}
-	});
+			}
+		});
+	}
+}
+
+function getContainer(cb) {
+	var cont = $id('modalContainerId');
+	if (cont) {
+		cont.remove();
+	}
+	cont = document.createElement('div');
+	cont.id = 'modalContainerId';
+	cont.classList.add("modal");
+	insertAfter(cont, cb);
+	return cont;
+}
+
+function insertAfter(elem, refElem) {
+	var parent = refElem.parentNode;
+	var next = refElem.nextSibling;
+	if (next) {
+		return parent.insertBefore(elem, next);
+	} else {
+		return parent.appendChild(elem);
+	}
 }
 
 function addScript(name) {

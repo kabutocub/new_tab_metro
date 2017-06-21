@@ -1,15 +1,7 @@
 //https://www.sitepoint.com/building-custom-right-click-context-menu-javascript/
 (function () {
-
 	"use strict";
-
-	//////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////
-	//
 	// H E L P E R    F U N C T I O N S
-	//
-	//////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Function to check if we clicked inside an element with a particular class
@@ -31,7 +23,6 @@
 				}
 			}
 		}
-
 		return false;
 	}
 
@@ -63,17 +54,9 @@
 		}
 	}
 
-	//////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////
-	//
 	// C O R E    F U N C T I O N S
-	//
-	//////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Variables.
-	 */
+	/** Variables. */
 	var contextMenuClassName = "context-menu";
 	var contextMenuItemClassName = "context-menu-item";
 	var contextMenuLinkClassName = "context-menu-link";
@@ -98,9 +81,7 @@
 	var windowWidth;
 	var windowHeight;
 
-	/**
-	 * Initialise our application's code.
-	 */
+	/** Initialise our application's code. */
 	function init() {
 		contextListener();
 		clickListener();
@@ -108,13 +89,10 @@
 		resizeListener();
 	}
 
-	/**
-	 * Listens for contextmenu events.
-	 */
+	/** Listens for contextmenu events. */
 	function contextListener() {
 		document.addEventListener("contextmenu", function (e) {
 			taskItemInContext = clickInsideElement(e, taskItemClassName);
-
 			if (taskItemInContext) {
 				e.preventDefault();
 				toggleMenuOn();
@@ -126,9 +104,7 @@
 		});
 	}
 
-	/**
-	 * Listens for click events.
-	 */
+	/** Listens for click events. */
 	function clickListener() {
 		document.addEventListener("click", function (e) {
 			var clickeElIsLink = clickInsideElement(e, contextMenuLinkClassName);
@@ -177,11 +153,7 @@
 		}
 	}
 
-	/**
-	 * Positions the menu properly.
-	 *
-	 * @param {Object} e The event
-	 */
+	/** Positions the menu properly. */
 	function positionMenu(e) {
 		clickCoords = getPosition(e);
 		clickCoordsX = clickCoords.x;

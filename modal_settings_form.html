@@ -1,0 +1,27 @@
+<div>
+	<label class="modal-bg" for="${mds}"></label>
+	<div class="modal-inner" style="width: 20em; height: 8em;">
+		<label class="modal-close" for="${mds}"></label>
+		<form id="modalFormId" autocomplete="off">
+			<span class="modal-header">Settings</span>
+			<div class="row rel">
+				<div class="lb">Change background</div>
+				<label class="btn set-btn" for="fileBgUploadId">Download</label>
+				<input id="fileBgUploadId" type="file" class="hide"/>
+			</div>
+			<div class="row rel">
+				<div class="lb">Reset background</div>
+				<a id="resetBgId" href="#" class="btn set-btn">Reset</a>
+			</div>
+			<div class="row rel">
+				<div class="lb">Import tiles data</div>
+				<label class="btn set-btn" for="fileRestoreId">Import</label>
+				<input id="fileRestoreId" type="file" class="hide"/>
+			</div>
+			<div class="row rel">
+				<div class="lb">Export tiles data</div>
+				<a id="exportDatId" href="#" download="metroTab.json" class="btn set-btn">Export</a>
+			</div>
+		</form>
+	</div>
+</div>

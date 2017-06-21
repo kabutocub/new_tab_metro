@@ -1,30 +1,36 @@
-<div id="modalRootId" data-scripts="jscolor.js;modal_edit_tile_form.js">
-	<span class="modal-header">Tile configurations</span>
-	<input id="tileId" type="hidden"/>
-	<div class="row">
-		<a id="tilePreviewId" href="javascript:void(0)" class="flex-item preview">
-			<span id="colorPreviewId" class="tab-color"></span>
-			<span id="thumbnailPreviewId" class="tab-thumbnail"></span>
-			<span id="titlePreviewId" class="tab-title">market</span>
-		</a>
-	</div>
-	<div class="row">
-		<label for="addUrlId">Site url*</label><br/>
-		<input id="addUrlId" class="modal-input fw" type="text"/>
-	</div>
-	<div class="row">
-		<label for="addTitleId">Title</label><br/>
-		<input id="addTitleId" class="modal-input fw" type="text"/>
-	</div>
-	<div class="row">
-		Icon <input id="btnImport" type="button" value="Load from computer"/>
-		<input id="fileImport" type="file" style="display: none;"/>
-	</div>
-	<div class="row">
-		<label for="tileBgId">Tile background</label>
-		<input id="tileBgId" class="picker-preview modal-input" value="#FFFFFF" />
-	</div>
-	<div class="row" style="float: right;">
-		<input id="tileSaveId" type="button" value="Save"/>
+<div>
+	<label class="modal-bg" for="${mds}"></label>
+	<div class="modal-inner" style="width: 20em; height: 22em;">
+		<label class="modal-close" for="${mds}"></label>
+		<form id="modalFormId" autocomplete="off">
+			<span class="modal-header">Tile configurations</span>
+			<input id="tileId" type="hidden"/>
+			<div class="row">
+				<div id="tilePreviewId" class="flex-item-preview">
+					<span id="colorPreviewId" class="tab-color"></span>
+					<canvas id="canvasPickerId" class="canvas-preview" width="250" height="250"></canvas>
+					<span id="titlePreviewId" class="tab-title">market</span>
+				</div>
+			</div>
+			<div class="row">
+				<label for="addUrlId">Site url*</label><br/>
+				<input id="addUrlId" class="modal-input fw" type="text"/>
+			</div>
+			<div class="row">
+				<label for="addTitleId">Title</label><br/>
+				<input id="addTitleId" class="modal-input fw" type="text"/>
+			</div>
+			<div class="row">
+				Icon <label for="fileImport" class="btn">Load from computer</label>
+				<input id="fileImport" type="file" class="hide"/>
+			</div>
+			<div class="row">
+				<label for="tileBgId">Tile background</label>
+				<input id="tileBgId" class="picker-preview modal-input" value="#FFFFFF"/>
+			</div>
+			<div class="row" style="float: right;">
+				<input id="tileSaveId" type="button" class="btn" value="Save"/>
+			</div>
+		</form>
 	</div>
 </div>

@@ -39,11 +39,24 @@ function addListeners(id, listeners, func) {
 
 function isURL(str) {
 	var urlPattern = new RegExp("(http|ftp|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?")
-	var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
-		'((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-		'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-		'(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-		'(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+	var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
+		'((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+		'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+		'(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+		'(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
 	return pattern.test(str);
+}
+
+function readFile(flrdr, action, asFile) {
+	var file = flrdr.files[0];
+	if (file) {
+		var fr = new FileReader();
+		fr.onloadend = action;
+		if (asFile) {
+			fr.readAsText(file);
+		} else {
+			fr.readAsDataURL(file);
+		}
+	}
 }
