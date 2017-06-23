@@ -1,6 +1,6 @@
 @font-face {
 	font-family: 'Roboto';
-	src: url('fonts/Roboto-Regular.ttf');
+	src: url('../fonts/Roboto-Regular.ttf');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -44,11 +44,11 @@ html, body {
 }
 
 .right-pn-button.add {
-	mask-image: url(icons/add.svg);
+	mask-image: url(../icons/add.svg);
 }
 
 .right-pn-button.settings {
-	mask-image: url(icons/settings.svg);
+	mask-image: url(../icons/settings.svg);
 }
 
 .right-pn-button:hover {

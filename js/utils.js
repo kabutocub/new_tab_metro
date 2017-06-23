@@ -38,7 +38,6 @@ function addListeners(id, listeners, func) {
 }
 
 function isURL(str) {
-	var urlPattern = new RegExp("(http|ftp|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?")
 	var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
 		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
 		'((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
@@ -59,4 +58,11 @@ function readFile(flrdr, action, asFile) {
 			fr.readAsDataURL(file);
 		}
 	}
+}
+
+/** Localize by replacing __MSG_***__ meta tags */
+function localizeHtmlPage(html) {
+	return html.replace(/__MSG_(\w+)__/g, function (match, v1) {
+		return v1 ? chrome.i18n.getMessage(v1) : "key_not_found";
+	});
 }

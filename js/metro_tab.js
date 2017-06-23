@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', loadBookmarkFolder);
 function loadBookmarkFolder() {
 	fillTiles();
 	applySorting();
-	//initEditor();
 	initEditorBackground();
 }
 

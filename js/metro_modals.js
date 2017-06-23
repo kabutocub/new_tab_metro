@@ -9,7 +9,8 @@ function applyModalLoader() {
 			var container = getContainer(cbx);
 			if (cbx.checked) {
 				loadModalByName(cbx.getAttribute('data-form'), function (textForm) {
-					container.innerHTML = textForm.replace(/\${mds}/g, cbx.id);
+					var html = textForm.replace(/\${mds}/g, cbx.id);
+					container.innerHTML = localizeHtmlPage(html);
 					var array = cbx.getAttribute('data-scripts').split(';');
 					for (var i = 0; i < array.length; i++) {
 						addScript(array[i]);
@@ -58,7 +59,7 @@ function addScript(name) {
 	var script = document.createElement('script');
 	script.id = name;
 	script.type = 'text/javascript';
-	script.src = name;
+	script.src = 'js/' + name;
 	document.head.appendChild(script);
 }
 

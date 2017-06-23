@@ -1,0 +1,58 @@
+{
+	"extensionDescription": {
+		"message": "Простая стартовая страница в стиле windows metro"
+	},
+	"devName": {
+		"message": "Иван Гуркин aka paradoxfm"
+	},
+
+	"cfgTileTitle": {
+		"message": "Настройка плитки"
+	},
+	"cfgSiteUrl": {
+		"message": "Url страницы*"
+	},
+	"cfgTitle": {
+		"message": "Название*"
+	},
+	"cfgIcon": {
+		"message": "Иконка"
+	},
+	"cfgLoadTitle": {
+		"message": "Загрузить с диска"
+	},
+	"cfgTileBack": {
+		"message": "Фон плитки"
+	},
+	"cfgSave": {
+		"message": "Сохранить"
+	},
+
+	"setTitle": {
+		"message": "Опции"
+	},
+	"setChangeBack": {
+		"message": "Изменить фон"
+	},
+	"setDownload": {
+		"message": "Загрузить"
+	},
+	"setResetBack": {
+		"message": "Сбросить фон"
+	},
+	"setReset": {
+		"message": "Сброс"
+	},
+	"setImportTiles": {
+		"message": "Импортировать данные"
+	},
+	"setImport": {
+		"message": "Сохранить"
+	},
+	"setExportTiles": {
+		"message": "Экспортировать данные"
+	},
+	"setExport": {
+		"message": "Загрузить"
+	}
+}

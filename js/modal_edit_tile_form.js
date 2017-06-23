@@ -8,9 +8,6 @@ function injectedFormScript() {
 	addListeners('addTitleId', 'keyup keypress blur change', function () {
 		$id('titlePreviewId').innerHTML = this.value;
 	});
-	addListeners('btnImport', 'click', function () {
-		$id('fileImport').click();
-	});
 	addListeners('tileBgId', 'change', function () {
 		$id('colorPreviewId').style.backgroundColor = this.value;
 	});
@@ -19,7 +16,9 @@ function injectedFormScript() {
 			var img = new Image();
 			img.addEventListener("load", function () {// здесь выполняет drawImage функцию
 				var canv = $id('canvasPickerId');
-				canv.getContext('2d').drawImage(img, 0, 0, canv.width, canv.height);
+				var context = canv.getContext('2d');
+				context.clearRect(0, 0, canvas.width, canvas.height);
+				context.drawImage(img, 0, 0, canv.width, canv.height);
 			}, false);
 			img.src = e.target.result;
 		});

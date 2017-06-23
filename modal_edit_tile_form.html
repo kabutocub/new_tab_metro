@@ -3,33 +3,33 @@
 	<div class="modal-inner" style="width: 20em; height: 22em;">
 		<label class="modal-close" for="${mds}"></label>
 		<form id="modalFormId" autocomplete="off">
-			<span class="modal-header">Tile configurations</span>
+			<span class="modal-header">__MSG_cfgTileTitle__</span>
 			<input id="tileId" type="hidden"/>
 			<div class="row">
 				<div id="tilePreviewId" class="flex-item-preview">
 					<span id="colorPreviewId" class="tab-color"></span>
 					<canvas id="canvasPickerId" class="canvas-preview" width="250" height="250"></canvas>
-					<span id="titlePreviewId" class="tab-title">market</span>
+					<span id="titlePreviewId" class="tab-title"></span>
 				</div>
 			</div>
 			<div class="row">
-				<label for="addUrlId">Site url*</label><br/>
+				<label for="addUrlId">__MSG_cfgSiteUrl__</label><br/>
 				<input id="addUrlId" class="modal-input fw" type="text"/>
 			</div>
 			<div class="row">
-				<label for="addTitleId">Title</label><br/>
+				<label for="addTitleId">__MSG_cfgTitle__</label><br/>
 				<input id="addTitleId" class="modal-input fw" type="text"/>
 			</div>
 			<div class="row">
-				Icon <label for="fileImport" class="btn">Load from computer</label>
+				__MSG_cfgIcon__ <label for="fileImport" class="btn">__MSG_cfgLoadTitle__</label>
 				<input id="fileImport" type="file" class="hide"/>
 			</div>
 			<div class="row">
-				<label for="tileBgId">Tile background</label>
+				<label for="tileBgId">__MSG_cfgTileBack__</label>
 				<input id="tileBgId" class="picker-preview modal-input" value="#FFFFFF"/>
 			</div>
 			<div class="row" style="float: right;">
-				<input id="tileSaveId" type="button" class="btn" value="Save"/>
+				<input id="tileSaveId" type="button" class="btn" value="__MSG_cfgSave__"/>
 			</div>
 		</form>
 	</div>

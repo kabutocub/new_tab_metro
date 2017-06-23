@@ -1,0 +1,59 @@
+{
+	"extensionDescription": {
+		"message": "A simple metro new tab page"
+	},
+	"devName": {
+		"message": "Ivan Gurkin aka paradoxfm"
+	},
+
+	"cfgTileTitle": {
+		"message": "Tile configuration"
+	},
+	"cfgSiteUrl": {
+		"message": "Site url*"
+	},
+	"cfgTitle": {
+		"message": "Title*"
+	},
+	"cfgIcon": {
+		"message": "Icon"
+	},
+	"cfgLoadTitle": {
+		"message": "Load from computer"
+	},
+	"cfgTileBack": {
+		"message": "Tile background"
+	},
+	"cfgSave": {
+		"message": "Save tile"
+	},
+
+	"setTitle": {
+		"message": "Settings"
+	},
+	"setChangeBack": {
+		"message": "Change background"
+	},
+	"setDownload": {
+		"message": "Download"
+	},
+	"setResetBack": {
+		"message": "Reset background"
+	},
+	"setReset": {
+		"message": "Reset"
+	},
+	"setImportTiles": {
+		"message": "Import tiles data"
+	},
+	"setImport": {
+		"message": "Import"
+	},
+	"setExportTiles": {
+		"message": "Export tiles data"
+	},
+	"setExport": {
+		"message": "Export"
+	}
+
+}
