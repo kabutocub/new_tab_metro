@@ -11,6 +11,10 @@ html, body {
 	margin: 0;
 }
 
+body {
+	font-size: 100%;
+}
+
 #backgroundContainerId {
 	position: fixed;
 	top: 0;
@@ -38,6 +42,8 @@ html, body {
 	margin-bottom: 1em;
 	mask-size: 100%;
 	mask-repeat: no-repeat;
+	-webkit-mask-size: 100%;
+	-webkit-mask-repeat: no-repeat;
 	cursor: pointer;
 	color: #345572;
 	background-color: #345572;
@@ -45,10 +51,12 @@ html, body {
 
 .right-pn-button.add {
 	mask-image: url(../icons/add.svg);
+	-webkit-mask-image: url(../icons/add.svg);
 }
 
 .right-pn-button.settings {
 	mask-image: url(../icons/settings.svg);
+	-webkit-mask-image: url(../icons/settings.svg);
 }
 
 .right-pn-button:hover {
@@ -163,4 +171,72 @@ html, body {
 	bottom: 0;
 	right: 0;
 	width: 6em;
+}
+
+.range-slider__range::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background: #337ab7;
+	cursor: pointer;
+	-webkit-transition: background .15s ease-in-out;
+	transition: background .15s ease-in-out;
+}
+
+.range-slider__range::-webkit-slider-thumb:hover {
+	background: #1abc9c;
+}
+
+.range-slider__range:active::-webkit-slider-thumb {
+	background: #1abc9c;
+}
+
+.range-slider__range::-moz-range-thumb {
+	width: 15px;
+	height: 15px;
+	border: 0;
+	border-radius: 50%;
+	background: #337ab7;
+	cursor: pointer;
+	-webkit-transition: background .15s ease-in-out;
+	transition: background .15s ease-in-out;
+}
+
+.range-slider__range::-moz-range-thumb:hover {
+	background: #1abc9c;
+}
+
+.range-slider__range:active::-moz-range-thumb {
+	background: #1abc9c;
+}
+
+.range-slider__range {
+	width: 19em;
+	margin: 0;
+	vertical-align: sub;
+}
+
+.range-slider__value {
+	display: inline-block;
+	position: relative;
+	width: 2em;
+	color: #fff;
+	line-height: 16px;
+	text-align: center;
+	border-radius: 3px;
+	background: #337ab7;
+	padding: 5px 6px;
+}
+
+.range-slider__value:after {
+	position: absolute;
+	left: -7px;
+	width: 0;
+	height: 0;
+	border-top: 7px solid transparent;
+	border-right: 7px solid #337ab7;
+	border-bottom: 7px solid transparent;
+	content: '';
 }

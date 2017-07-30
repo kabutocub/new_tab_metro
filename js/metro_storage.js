@@ -2,6 +2,7 @@
 MetroStorage = {
 	_arrayTilesId: null,
 	_backgroundImage: null,
+	_scale: null,
 	getArrayTilesId: function () {
 		if (!this._arrayTilesId && localStorage.arrayTilesId) {
 			this._arrayTilesId = JSON.parse(localStorage.arrayTilesId);
@@ -65,6 +66,20 @@ MetroStorage = {
 			localStorage.backgroundImage = value;
 		} else {
 			localStorage.removeItem('backgroundImage');
+		}
+	},
+	getScale: function () {
+		if (!this._scale && localStorage.scale) {
+			this._scale = localStorage.scale;
+		}
+		return this._scale;
+	},
+	setScale: function (value) {
+		if (value) {
+			this._scale = value;
+			localStorage.scale = value;
+		} else {
+			localStorage.removeItem('scale');
 		}
 	}
 };

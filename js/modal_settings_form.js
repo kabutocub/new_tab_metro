@@ -2,6 +2,8 @@
 injectedFormScript();
 
 function injectedFormScript() {
+	$id('rangeScaleValId').innerHTML = MetroStorage.getScale();
+	$id('rangeScaleId').value = MetroStorage.getScale();
 	addListeners('exportDatId', 'click', function () {
 		var encodedData = window.btoa(JSON.stringify(localStorage)); // encode a string
 		this.href = 'data:application/octet-stream;charset=utf-8,' + encodedData;
@@ -15,6 +17,11 @@ function injectedFormScript() {
 			MetroStorage.setBackgroundImage(e.target.result);
 			$id('backgroundContainerId').style.backgroundImage = 'url(' + MetroStorage.getBackgroundImage() + ')';
 		});
+	});
+	addListeners('rangeScaleId', 'input', function () {
+		MetroStorage.setScale(this.value);
+		$id('rangeScaleValId').innerHTML = this.value;
+		$id('site-container').style.fontSize = this.value + '%';
 	});
 	addListeners('fileRestoreId', 'change', function () {
 		readFile(this, function (e) {

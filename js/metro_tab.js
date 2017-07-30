@@ -21,6 +21,7 @@ function createTileHtml(tile, replace) {
 		$class(item, 'tab-thumbnail').style.backgroundImage = 'url(' + tile.icon + ')';
 	}
 	var container = $id('site-container');
+	container.style.fontSize = MetroStorage.getScale() + '%';
 	if (replace) {
 		container.replaceChild(item, $id(tile.id));
 	} else {

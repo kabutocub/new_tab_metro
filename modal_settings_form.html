@@ -1,9 +1,13 @@
 <div>
 	<label class="modal-bg" for="${mds}"></label>
-	<div class="modal-inner" style="width: 20em; height: 8em;">
+	<div class="modal-inner" style="width: 20em; height: 11em;">
 		<label class="modal-close" for="${mds}"></label>
 		<form id="modalFormId" autocomplete="off">
 			<span class="modal-header">__MSG_setTitle__</span>
+			<div class="row rel range-slider">
+				<input id="rangeScaleId" class="range-slider__range" type="range" min="70" max="100" step="5"/>
+				<span id="rangeScaleValId" class="range-slider__value">100</span>
+			</div>
 			<div class="row rel">
 				<div class="lb">__MSG_setChangeBack__</div>
 				<label class="btn set-btn" for="fileBgUploadId">__MSG_setDownload__</label>
