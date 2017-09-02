@@ -51,6 +51,7 @@ function injectedFormScript() {
 		var replace = tileId.value.length > 0;
 		var newBkmk = {
 			id: replace ? tileId.value : generateId(),
+			isDbl: $id('tileDblId').checked,
 			url: $id('addUrlId').value,
 			color: $id('tileBgId').value,
 			title: $id('addTitleId').value,

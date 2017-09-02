@@ -79,6 +79,10 @@ body {
 	position: relative;
 }
 
+.flex-item.double {
+	width: 17.2em;
+}
+
 .flex-item-preview {
 	display: inline-block;
 	border: 1px solid lightblue;
@@ -130,6 +134,11 @@ body {
 	background-origin: padding-box;
 	background-repeat: no-repeat;
 	background-size: cover;
+}
+
+.double .tab-thumbnail {
+	left: 5.35em;
+	right: 5.35em;
 }
 
 .picker-preview {

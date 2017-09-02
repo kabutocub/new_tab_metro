@@ -24,6 +24,9 @@
 	"cfgTileBack": {
 		"message": "Tile background"
 	},
+	"cfgTileDbl": {
+		"message": "Double width"
+	},
 	"cfgSave": {
 		"message": "Save tile"
 	},

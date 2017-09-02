@@ -24,6 +24,9 @@
 	"cfgTileBack": {
 		"message": "Фон плитки"
 	},
+	"cfgTileDbl": {
+		"message": "Широкая"
+	},
 	"cfgSave": {
 		"message": "Сохранить"
 	},

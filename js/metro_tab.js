@@ -11,6 +11,9 @@ function createTileHtml(tile, replace) {
 	item.setAttribute("id", tile.id);
 	item.setAttribute("href", tile.url);
 	item.setAttribute('class', 'flex-item');
+	if (tile.isDbl) {
+		item.classList.add('double');
+	}
 	item.setAttribute('data-id', tile.id);
 
 	item.innerHTML = '<span class="tab-color" style="background-color: ' + tile.color + '"></span>' +
@@ -69,6 +72,7 @@ function editItemContextMenu(id) {
 			$id('addTitleId').value = tile.title;
 			$id('tileBgId').value = tile.color;
 			$id('addUrlId').value = tile.url;
+			$id('tileDblId').checked = tile.isDbl;
 
 			var img = new Image();
 			img.addEventListener('load', function () {
