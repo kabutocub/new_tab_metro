@@ -1,52 +1,63 @@
 /** Created by IGurkin on 15.06.2017. */
 MetroStorage = {
-	_arrayTilesId: null,
-	_backgroundImage: null,
-	_scale: null,
+	_store: null,
+	initStore: function () {
+		//миграция хранилища
+		if (localStorage.arrayTilesId) {
+			console.log('migration');
+			let arrIds = JSON.parse(localStorage.arrayTilesId);
+			browser.storage.local.set({'arrayTilesId': arrIds});
+			localStorage.removeItem('arrayTilesId');
+			browser.storage.local.set({'scale': localStorage.scale});
+			localStorage.removeItem('scale');
+			browser.storage.local.set({'backgroundImage': localStorage.backgroundImage});
+			localStorage.removeItem('backgroundImage');
+			arrIds.forEach(function (val, idx, array) {
+				browser.storage.local.set({[val]: JSON.parse(localStorage[val])});
+				localStorage.removeItem(val);
+			});
+		}
+		//инициализация
+		if (this._store) {
+			return Promise.resolve(this._store);
+		}
+		return browser.storage.local.get().then((itm) => {
+			//console.log(itm);
+			this._store = Object.assign({arrayTilesId: [], scale: 90}, itm);
+		});
+	},
 	getArrayTilesId: function () {
-		if (!this._arrayTilesId && localStorage.arrayTilesId) {
-			this._arrayTilesId = JSON.parse(localStorage.arrayTilesId);
-		}
-		if (!this._arrayTilesId) {
-			this._arrayTilesId = [];
-		}
-		return this._arrayTilesId;
+		return this._store.arrayTilesId;
 	},
 	setArrayTilesId: function (val) {
 		if (val) {
-			this._arrayTilesId = val;
-			localStorage.arrayTilesId = JSON.stringify(val);
+			this._store.arrayTilesId = val;
+			browser.storage.local.set({'arrayTilesId': val});
 		}
 	},
 	addOrUpdateTile: function (tile) {
 		if (tile && tile.id) {
-			var tilesIds = this.getArrayTilesId();
+			let tilesIds = this.getArrayTilesId();
 			if (tilesIds.indexOf(tile.id) === -1) {
 				tilesIds.push(tile.id);
 				this.setArrayTilesId(tilesIds);
 			}
-			localStorage[tile.id] = JSON.stringify(tile);
+			browser.storage.local.set({[tile.id]: tile});
 		}
 	},
 	findTileById: function (id) {
-		if (localStorage[id]) {
-			return JSON.parse(localStorage[id]);
-		}
-		return null;
+		return this._store[id];
 	},
 	removeTileById: function (id) {
-		var storage = localStorage[id];
-		if (storage) {
-			localStorage.removeItem(id);
-		}
-		var arrayTilesId = this.getArrayTilesId();
+		browser.storage.local.remove(id);
+		let arrayTilesId = this.getArrayTilesId();
 		arrayTilesId.splice(arrayTilesId.indexOf(id), 1);
 		this.setArrayTilesId(arrayTilesId);
 	},
 	moveTile: function (oldIndex, newIndex) {
-		var arrayTilesId = this.getArrayTilesId();
+		let arrayTilesId = this.getArrayTilesId();
 		if (newIndex >= arrayTilesId.length) {
-			var k = newIndex - arrayTilesId.length;
+			let k = newIndex - arrayTilesId.length;
 			while ((k--) + 1) {
 				arrayTilesId.push(undefined);
 			}
@@ -55,31 +66,21 @@ MetroStorage = {
 		this.setArrayTilesId(arrayTilesId);
 	},
 	getBackgroundImage: function () {
-		if (!this._backgroundImage && localStorage.backgroundImage) {
-			this._backgroundImage = localStorage.backgroundImage;
-		}
-		return this._backgroundImage;
+		return this._store.backgroundImage;
 	},
 	setBackgroundImage: function (value) {
 		if (value) {
-			this._backgroundImage = value;
-			localStorage.backgroundImage = value;
+			this._store.backgroundImage = value;
+			browser.storage.local.set({'backgroundImage': value});
 		} else {
-			localStorage.removeItem('backgroundImage');
+			browser.storage.local.remove('backgroundImage');
 		}
 	},
 	getScale: function () {
-		if (!this._scale && localStorage.scale) {
-			this._scale = localStorage.scale;
-		}
-		return this._scale;
+		return this._store.scale;
 	},
 	setScale: function (value) {
-		if (value) {
-			this._scale = value;
-			localStorage.scale = value;
-		} else {
-			localStorage.removeItem('scale');
-		}
+		this._store.scale = value;
+		browser.storage.local.set({'scale': value});
 	}
 };

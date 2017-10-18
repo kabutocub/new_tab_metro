@@ -5,8 +5,10 @@ function injectedFormScript() {
 	$id('rangeScaleValId').innerHTML = MetroStorage.getScale();
 	$id('rangeScaleId').value = MetroStorage.getScale();
 	addListeners('exportDatId', 'click', function () {
-		var encodedData = window.btoa(JSON.stringify(localStorage)); // encode a string
-		this.href = 'data:application/octet-stream;charset=utf-8,' + encodedData;
+		browser.storage.local.get().then(function (itm) {
+			let file = new File([JSON.stringify(itm, null, "\t")], "backup.json", {type: "text/plain;charset=utf-8"});
+			saveAs(file);
+		});
 	});
 	addListeners('resetBgId', 'click', function () {
 		MetroStorage.setBackgroundImage(null);
@@ -25,10 +27,10 @@ function injectedFormScript() {
 	});
 	addListeners('fileRestoreId', 'change', function () {
 		readFile(this, function (e) {
-			var decodedData = JSON.parse(window.atob(e.target.result));
-			var keys = Object.keys(decodedData);
+			let decodedData = JSON.parse(window.atob(e.target.result));
+			let keys = Object.keys(decodedData);
 			localStorage.clear();
-			for (var i = 0; i < keys.length; i++) {
+			for (let i = 0; i < keys.length; i++) {
 				localStorage[keys[i]] = decodedData[keys[i]];
 			}
 		}, true);

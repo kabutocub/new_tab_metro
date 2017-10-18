@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Metro tab">
+	<meta name="author" content="paradoxfm">
+	<link rel="stylesheet" href="css/metro_tab.css?v=1.1">
+	<!--<link rel="stylesheet" href="css/modal.css?v=1.1">-->
+</head>
+
+<body>
+
+<div style="margin: 1em">
+	<label class="modal-bg" for="${mds}"></label>
+	<div class="modal-inner" style="width: 20em; height: auto;">
+		<label class="modal-close" for="${mds}"></label>
+		<form id="modalFormId" autocomplete="off">
+			<input id="tileId" type="hidden"/>
+			<div class="row">
+				<label for="addUrlId">Url</label><br/>
+				<input id="addUrlId" class="modal-input fw" type="text" style="height: 1.6em; border: 1px solid gray; border-radius: 2px; padding: 3px 6px;"/>
+			</div>
+			<div class="row">
+				<label for="addTitleId">Title</label><br/>
+				<input id="addTitleId" class="modal-input fw" type="text" style="height: 1.6em; border: 1px solid gray; border-radius: 2px; padding: 3px 6px;"/>
+			</div>
+			<div class="row">
+				<input id="tileDblId" type="checkbox"/>
+				<label for="tileDblId">__MSG_cfgTileDbl__</label>
+			</div>
+			<div class="row" style="float: right;">
+				<input id="tileSaveId" type="button" class="btn" value="OK"/>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="js/metro_storage.js"></script>
+<script src="js/utils.js"></script>
+<!--<script src="js/metro_modals.js"></script>-->
+<script src="js/jscolor.js"></script>
+<script src="js/modal_edit_tile_form.js"></script>
+</body>
+</html>

@@ -50,12 +50,12 @@
 		"message": "Импортировать данные"
 	},
 	"setImport": {
-		"message": "Сохранить"
+		"message": "Открыть"
 	},
 	"setExportTiles": {
 		"message": "Экспортировать данные"
 	},
 	"setExport": {
-		"message": "Загрузить"
+		"message": "Сохранить"
 	}
 }

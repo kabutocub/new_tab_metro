@@ -1,13 +1,17 @@
 document.addEventListener('DOMContentLoaded', loadBookmarkFolder);
 
 function loadBookmarkFolder() {
-	fillTiles();
-	applySorting();
-	initEditorBackground();
+	MetroStorage.initStore().then(function () {
+		fillTiles();
+		applySorting();
+		initEditorBackground();
+	}, function (error) {
+		console.log(error);
+	});
 }
 
 function createTileHtml(tile, replace) {
-	var item = document.createElement('a');
+	let item = document.createElement('a');
 	item.setAttribute("id", tile.id);
 	item.setAttribute("href", tile.url);
 	item.setAttribute('class', 'flex-item');
@@ -23,7 +27,7 @@ function createTileHtml(tile, replace) {
 	if (tile.icon && tile.icon.length > 0) {
 		$class(item, 'tab-thumbnail').style.backgroundImage = 'url(' + tile.icon + ')';
 	}
-	var container = $id('site-container');
+	let container = $id('site-container');
 	container.style.fontSize = MetroStorage.getScale() + '%';
 	if (replace) {
 		container.replaceChild(item, $id(tile.id));
@@ -33,11 +37,11 @@ function createTileHtml(tile, replace) {
 }
 
 function fillTiles() {
-	var arrayTilesId = MetroStorage.getArrayTilesId();
-	console.log("tiles count: " + arrayTilesId.length);
-	for (var i = 0; i < arrayTilesId.length; i++) {
-		var id = arrayTilesId[i];
-		var tile = MetroStorage.findTileById(id);
+	let arrayTilesId = MetroStorage.getArrayTilesId();
+	//console.log("tiles count: " + arrayTilesId.length);
+	for (let i = 0; i < arrayTilesId.length; i++) {
+		let id = arrayTilesId[i];
+		let tile = MetroStorage.findTileById(id);
 		if (tile) {
 			createTileHtml(tile);
 		}
@@ -45,7 +49,7 @@ function fillTiles() {
 }
 
 function applySorting() {
-	var el = $id('site-container');
+	let el = $id('site-container');
 	Sortable.create(el, {
 		animation: 100,
 		onEnd: function (e) {// Element dragging ended
@@ -66,7 +70,7 @@ function deleteItemContextMenu(id) {
 function editItemContextMenu(id) {
 	$id('modalState').click();
 	setTimeout(function () {
-		var tile = MetroStorage.findTileById(id);
+		let tile = MetroStorage.findTileById(id);
 		if (tile) {
 			$id('tileId').value = tile.id;
 			$id('addTitleId').value = tile.title;
@@ -74,9 +78,9 @@ function editItemContextMenu(id) {
 			$id('addUrlId').value = tile.url;
 			$id('tileDblId').checked = tile.isDbl;
 
-			var img = new Image();
+			let img = new Image();
 			img.addEventListener('load', function () {
-				var canv = $id('canvasPickerId');
+				let canv = $id('canvasPickerId');
 				canv.getContext('2d').drawImage(img, 0, 0, canv.width, canv.height);
 			}, false);
 			img.src = tile.icon;
@@ -85,16 +89,16 @@ function editItemContextMenu(id) {
 }
 
 function initEditorBackground() {
-	var fileBack = $id('fileBkg');
+	let fileBack = $id('fileBkg');
 	if (fileBack) {
 		fileBack.addEventListener('change', function () {
 			readFile(this, function (e) {
-				var img = e.target.result;
+				let img = e.target.result;
 				$id('backgroundContainerId').style.backgroundImage = 'url(' + img + ')';
 				MetroStorage.setBackgroundImage(img);
 			});
 		});
 	}
-	var image = MetroStorage.getBackgroundImage();
+	let image = MetroStorage.getBackgroundImage();
 	$id('backgroundContainerId').style.backgroundImage = 'url(' + (image ? image : 'img/background.jpg') + ')';
 }
