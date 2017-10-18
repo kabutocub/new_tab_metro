@@ -23,10 +23,12 @@ browser.tabs.onUpdated.addListener((id, inf) => {
 function loadBookmarkFolder() {
 	let stor = browser.storage.local.get();
 	return stor.then((setts) => {
-		setts.arrayTilesId.forEach(function (val) {
-			urls.push(setts[val].url);
-		});
-		//console.log(urls);
+		if (setts.arrayTilesId) {
+			setts.arrayTilesId.forEach(function (val) {
+				urls.push(setts[val].url);
+			});
+			//console.log(urls);
+		}
 	});
 }
 

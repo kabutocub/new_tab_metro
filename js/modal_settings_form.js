@@ -27,12 +27,11 @@ function injectedFormScript() {
 	});
 	addListeners('fileRestoreId', 'change', function () {
 		readFile(this, function (e) {
-			let decodedData = JSON.parse(window.atob(e.target.result));
-			let keys = Object.keys(decodedData);
-			localStorage.clear();
-			for (let i = 0; i < keys.length; i++) {
-				localStorage[keys[i]] = decodedData[keys[i]];
-			}
+			let dat = JSON.parse(e.target.result);
+			browser.storage.local.clear();
+			browser.storage.local.set(dat).then(function () {
+				browser.tabs.reload();
+			});
 		}, true);
 	});
 }
