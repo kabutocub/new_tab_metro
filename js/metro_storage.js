@@ -40,6 +40,7 @@ MetroStorage = {
 			let tilesIds = this.getArrayTilesId();
 			if (tilesIds.indexOf(tile.id) === -1) {
 				tilesIds.push(tile.id);
+				this._store[tile.id] = tile;
 				this.setArrayTilesId(tilesIds);
 			}
 			browser.storage.local.set({[tile.id]: tile});

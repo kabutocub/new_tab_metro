@@ -1,6 +1,7 @@
 //https://www.sitepoint.com/building-custom-right-click-context-menu-javascript/
 (function () {
 	"use strict";
+
 	// H E L P E R    F U N C T I O N S
 
 	/**
@@ -12,7 +13,7 @@
 	 * @return {Boolean}
 	 */
 	function clickInsideElement(e, className) {
-		var el = e.srcElement || e.target;
+		let el = e.srcElement || e.target;
 
 		if (el.classList.contains(className)) {
 			return el;
@@ -33,11 +34,11 @@
 	 * @return {Object} Returns the x and y position
 	 */
 	function getPosition(e) {
-		var posx = 0;
-		var posy = 0;
+		let posx = 0;
+		let posy = 0;
 
 		if (!e) {
-			var e = window.event;
+			let e = window.event;
 		}
 
 		if (e.pageX || e.pageY) {
@@ -57,29 +58,29 @@
 	// C O R E    F U N C T I O N S
 
 	/** Variables. */
-	var contextMenuClassName = "context-menu";
-	var contextMenuItemClassName = "context-menu-item";
-	var contextMenuLinkClassName = "context-menu-link";
-	var contextMenuActive = "context-menu--active";
+	let contextMenuClassName = "context-menu";
+	let contextMenuItemClassName = "context-menu-item";
+	let contextMenuLinkClassName = "context-menu-link";
+	let contextMenuActive = "context-menu--active";
 
-	var taskItemClassName = "flex-item";
-	var taskItemInContext;
+	let taskItemClassName = "flex-item";
+	let taskItemInContext;
 
-	var clickCoords;
-	var clickCoordsX;
-	var clickCoordsY;
+	let clickCoords;
+	let clickCoordsX;
+	let clickCoordsY;
 
-	var menu = document.querySelector("#context-menu");
-	var menuItems = menu.querySelectorAll(".context-menu-item");
-	var menuState = 0;
-	var menuWidth;
-	var menuHeight;
-	var menuPosition;
-	var menuPositionX;
-	var menuPositionY;
+	let menu = document.querySelector("#context-menu");
+	let menuItems = menu.querySelectorAll(".context-menu-item");
+	let menuState = 0;
+	let menuWidth;
+	let menuHeight;
+	let menuPosition;
+	let menuPositionX;
+	let menuPositionY;
 
-	var windowWidth;
-	var windowHeight;
+	let windowWidth;
+	let windowHeight;
 
 	/** Initialise our application's code. */
 	function init() {
@@ -107,13 +108,13 @@
 	/** Listens for click events. */
 	function clickListener() {
 		document.addEventListener("click", function (e) {
-			var clickeElIsLink = clickInsideElement(e, contextMenuLinkClassName);
+			let clickeElIsLink = clickInsideElement(e, contextMenuLinkClassName);
 
 			if (clickeElIsLink) {
 				e.preventDefault();
 				menuItemListener(clickeElIsLink);
 			} else {
-				var button = e.which || e.button;
+				let button = e.which || e.button;
 				if (button === 1) {
 					toggleMenuOff();
 				}
@@ -184,8 +185,8 @@
 	 * @param {HTMLElement} link The link that was clicked
 	 */
 	function menuItemListener(link) {
-		var id = taskItemInContext.getAttribute("data-id");
-		var action = link.getAttribute("data-action");
+		let id = taskItemInContext.getAttribute("data-id");
+		let action = link.getAttribute("data-action");
 		console.log("Task ID - " + id + ", Task action - " + action);
 		switch (action) {
 			case 'Edit':
